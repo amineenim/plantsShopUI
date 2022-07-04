@@ -2,20 +2,29 @@ import '../style/cart.css'
 import { useState } from 'react'
 import '../style/cart.css' 
 
-function Cart(){
-	const monsteraPrice = 10
-	const [isOpen,setIsOpen] = useState(false)
-	const [cart,updateCart] = useState(0)
+function Cart({cart,updateCart}){
 
+	
+	const [isOpen,setIsOpen] = useState(true)
+
+	const total = cart.reduce(
+		(acc,plantType) => acc + plantType.amount*plantType.price,
+		0
+		)
 
 	return isOpen ? (
 		<div className="cart">
-		<h1>Mon panier</h1>
-		<div>Monstera : {monsteraPrice}€</div>
-		<button onClick={() => updateCart(cart+1)} className="cart-add-button">Ajouter</button>
-		<h3>Total : { cart*monsteraPrice }€</h3>
 		<button onClick={() => setIsOpen(false)}>Cacher le Panier</button>
-		<button onClick={() => updateCart(0)}>Vider le Panier</button>
+		<h2>Panier</h2>
+		<ul>
+		  {cart.map(({name,price,amount},index) =>(
+		  	<div key ={'${name}-'}>
+		  	{name} {price} * {amount}
+		  	</div>
+		  	))}
+		</ul>
+		<h3>Total :{total}$</h3>
+		<button onClick={() => updateCart([])}>Vider le Panier</button>
 		</div>
 		)
 		 :
