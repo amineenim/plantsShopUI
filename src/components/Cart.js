@@ -18,7 +18,7 @@ function Cart({cart,updateCart}){
 		<h2>Panier</h2>
 		<ul>
 		  {cart.map(({name,price,amount},index) =>(
-		  	<div key ={'${name}-'}>
+		  	<div key ={'${name}-index'}>
 		  	{name} {price} * {amount}
 		  	</div>
 		  	))}
